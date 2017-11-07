@@ -46,7 +46,7 @@ public class Client {
         try {
             channel = bootstrap.connect(host, port).sync().channel();
         } catch (Exception e) {
-            LogUtils.e(TAG,String.format("连接Server(IP[%s],PORT[%s])失败  host"+ host+"port:"+port)+e.getMessage());
+            LogUtils.e(TAG,String.format("连接Server(IP[%s],PORT[%s])失败 ", host,port)+e.getMessage());
             return null;
         }
         return channel;
