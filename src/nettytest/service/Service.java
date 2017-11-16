@@ -1,4 +1,4 @@
-package service;
+package nettytest.service;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;

@@ -1,4 +1,4 @@
-package service;
+package nettytest.service;
 
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;

@@ -1,4 +1,4 @@
-package service;
+package nettytest.service;
 
 public class LogUtils {
     public static void e(String TAG,String mst) {

@@ -24,7 +24,6 @@ public class StatisticsCode {
               }
            }
         }else{
-            // TODO: 2017/11/16 处理行
             readFile(file);
         }
     }

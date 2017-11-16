@@ -1,5 +1,4 @@
-package client;
-
+package nettytest.client;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -9,7 +8,8 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
-import service.LogUtils;
+import nettytest.service.LogUtils;
+
 
 public class Client {
     private static final String TAG="Client";
