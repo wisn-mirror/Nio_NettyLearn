@@ -5,12 +5,11 @@ import java.net.InetSocketAddress;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
 import java.nio.charset.Charset;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 
 public class NioServer {
-
+    private int clientCount=0;
     private ServerSocketChannel serverSocketChannel;
     private Selector selector;
     private Charset charset = Charset.forName("UTF-8");
@@ -27,7 +26,8 @@ public class NioServer {
 
         while (true) {
             selector.select();
-            Iterator<SelectionKey> iterator = selector.selectedKeys().iterator();
+            Set<SelectionKey> selectionKeys = selector.selectedKeys();
+            Iterator<SelectionKey> iterator =selectionKeys.iterator();
             while (iterator.hasNext()) {
                 SelectionKey key = iterator.next();
                 iterator.remove();
@@ -38,7 +38,8 @@ public class NioServer {
                     System.out.println("accept:  " + accept);
                     accept.configureBlocking(false);
                     accept.register(selector, SelectionKey.OP_READ);
-                    bordCast(key,accept+"上线");
+                    clientCount++;
+                    bordCast(key,accept+"上线,目前在线："+ clientCount);
                 } else if (key.isReadable()) {
                     recvAndReply(key);
                 } else if (key.isConnectable()) {
@@ -63,7 +64,9 @@ public class NioServer {
             bordCast(key,channel+"发送消息："+msg+"\n");
 //            channel.write(ByteBuffer.wrap((msg + new Date()).getBytes()));
         } else {
+            bordCast(key,channel+" 断开链接 目前在线:"+clientCount+"\n");
             channel.close();
+            clientCount--;
         }
     }
 
