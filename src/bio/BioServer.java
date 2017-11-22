@@ -24,6 +24,7 @@ public class BioServer {
                     @Override
                     public void run() {
                         System.out.println("客户端：" + accept + "链接上来了");
+                        sendMsgforAll(accept,"客户端：" + accept + "链接上来了 当前在线:"+sockets.size());
                         handleMessage(accept);
                     }
                 });
@@ -54,9 +55,11 @@ public class BioServer {
     private static void sendMsgforAll(Socket socket, String msg) {
         for (Socket socketother : sockets) {
             try {
-                OutputStream outputStream = socketother.getOutputStream();
-                outputStream.write((socket + ":" + msg + "\n").getBytes());
-                outputStream.flush();
+                if(socketother!=socket){
+                    OutputStream outputStream = socketother.getOutputStream();
+                    outputStream.write((socket + ":" + msg + "\n").getBytes());
+                    outputStream.flush();
+                }
             } catch (IOException e) {
 //                e.printStackTrace();
                if(socketother.isClosed()||!socketother.isConnected()||!socketother.isOutputShutdown()){
