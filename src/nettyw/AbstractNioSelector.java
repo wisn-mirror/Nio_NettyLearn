@@ -9,13 +9,14 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-public class AbstractNioSelector implements Runnable {
+public abstract class AbstractNioSelector implements Runnable {
     private Executor executor;
     private String threadName;
-    private NioSelectorRunnablePool nioSelectorRunnablePool;
-    private Selector selector;
-    private AtomicBoolean weakup=new AtomicBoolean();
-    private Queue<Runnable> taskQueue=new ConcurrentLinkedQueue<>();
+    protected NioSelectorRunnablePool nioSelectorRunnablePool;
+    protected Selector selector;
+    private AtomicBoolean weakup = new AtomicBoolean();
+    private Queue<Runnable> taskQueue = new ConcurrentLinkedQueue<>();
+
     public AbstractNioSelector(Executor executor, String threadName, NioSelectorRunnablePool nioSelectorRunnablePool) {
         this.executor = executor;
         this.threadName = threadName;
@@ -32,14 +33,14 @@ public class AbstractNioSelector implements Runnable {
         executor.execute(this);
     }
 
-    public void registerTask(Runnable task){
+    public void registerTask(Runnable task) {
         taskQueue.add(task);
-        Selector selector=this.selector;
-        if(selector!=null){
-            if(weakup.compareAndSet(false,true)){
+        Selector selector = this.selector;
+        if (selector != null) {
+            if (weakup.compareAndSet(false, true)) {
                 selector.wakeup();
             }
-        }else{
+        } else {
             taskQueue.remove(task);
         }
     }
@@ -47,7 +48,7 @@ public class AbstractNioSelector implements Runnable {
     @Override
     public void run() {
         Thread.currentThread().setName(threadName);
-        while(true){
+        while (true) {
             weakup.set(false);
             selector(selector);
             processTaskQueue();
@@ -57,21 +58,17 @@ public class AbstractNioSelector implements Runnable {
     }
 
 
-
     private void processTaskQueue() {
-        for(;;){
+        for (; ; ) {
             Runnable poll = taskQueue.poll();
-            if(poll!=null){
+            if (poll == null) {
                 break;
             }
             poll.run();
         }
     }
 
-    private void selector(Selector selector) {
+    public abstract void selector(Selector selector);
 
-    }
-    private void process(Selector selector) {
-
-    }
+    public abstract void process(Selector selector);
 }

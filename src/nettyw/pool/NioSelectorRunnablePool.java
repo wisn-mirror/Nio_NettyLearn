@@ -1,6 +1,7 @@
 package nettyw.pool;
 
 import nettyw.NioServerBoss;
+import nettyw.NioServerWorker;
 
 import java.util.concurrent.Executor;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,16 +19,16 @@ public class NioSelectorRunnablePool {
 
 
     private void initBoss(Executor bossExecutor, int count) {
-        bosses = new Boss[count];
-        for (int i = 0; i < count; i++) {
+        bosses = new NioServerBoss[count];
+        for (int i = 0; i <count; i++) {
             bosses[i] = new NioServerBoss(bossExecutor, "boss" + i, this);
         }
     }
 
     private void initWorke(Executor workExecutor, int count) {
-        workers = new Worker[count];
+        workers = new NioServerWorker[count];
         for (int i = 0; i < count; i++) {
-            bosses[i] = new NioServerBoss(workExecutor, "worker" + i, this);
+            workers[i] = new NioServerWorker(workExecutor, "worker" + i, this);
         }
     }
 
