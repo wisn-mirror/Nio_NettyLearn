@@ -8,7 +8,7 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.codec.string.StringDecoder;
 import io.netty.handler.codec.string.StringEncoder;
 import io.netty.util.CharsetUtil;
-import nettytest.service.LogUtils;
+import utils.LogUtils;
 
 
 public class Client {
