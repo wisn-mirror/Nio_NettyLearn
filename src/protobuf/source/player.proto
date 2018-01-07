@@ -1,0 +1,10 @@
+option java_package="protobuf.bean";
+option java_outer_classname="PlayerModule";
+message Player{
+    required int64 playerId=1;
+    required string name=2;
+    repeated string skills=3;
+}
+message Resource{
+    required int32  energy=4;
+}
