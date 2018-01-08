@@ -11,7 +11,7 @@ public class Test {
         deviceId = "".replace(":", "").trim();
         System.out.println("==" + deviceId + "==");
 //        for (int i=0;i<100;i++){
-//            Request request=new Request("request"+i);
+//            Response request=new Response("request"+i);
 //            request.excute();
 //        }
     }

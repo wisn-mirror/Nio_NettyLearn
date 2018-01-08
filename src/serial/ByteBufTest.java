@@ -14,7 +14,7 @@ public class ByteBufTest {
         byteBuf.writeInt(222);
         byteBuf.writeInt(33);
         byteBuf.writeDouble(33.2);
-        byte[] array = byteBuf.ensureWritable(byteBuf.writerIndex());
-        System.out.println(Arrays.toString(array));
+//        byte[] array = byteBuf.ensureWritable(byteBuf.writerIndex());
+//        System.out.println(Arrays.toString(array));
     }
 }
