@@ -17,6 +17,10 @@ public class ResponseDecode extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext channelHandlerContext, ByteBuf byteBuf, List<Object> list) throws Exception {
         while (true) {
             if (byteBuf.readableBytes() > 14) {
+                //防止socket 字节攻击
+                if(byteBuf.readableBytes()>ContentValues.bufferMaxLength){
+                    byteBuf.skipBytes(byteBuf.readableBytes());
+                }
                 int readerIndex;
                 while (true) {
                     readerIndex = byteBuf.readerIndex();
@@ -25,6 +29,8 @@ public class ResponseDecode extends ByteToMessageDecoder {
                         break;
                     }
                     byteBuf.resetReaderIndex();
+                    //略过一个字节
+                    byteBuf.readByte();
                     if (byteBuf.readableBytes() < 14) {
                         return;
                     }

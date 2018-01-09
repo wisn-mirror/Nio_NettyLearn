@@ -17,6 +17,10 @@ public class RequestDecode extends ByteToMessageDecoder {
         while (true) {
 
             if (byteBuf.readableBytes() >= 12) {
+                //防止socket 字节攻击
+                if(byteBuf.readableBytes()>ContentValues.bufferMaxLength){
+                    byteBuf.skipBytes(byteBuf.readableBytes());
+                }
                 int readerIndex;
                 while (true) {
                     readerIndex = byteBuf.readerIndex();
@@ -25,6 +29,8 @@ public class RequestDecode extends ByteToMessageDecoder {
                         break;
                     }
                     byteBuf.resetReaderIndex();
+                    //略过一个字节
+                    byteBuf.readByte();
                     if (byteBuf.readableBytes() < 12) {
                         return;
                     }
