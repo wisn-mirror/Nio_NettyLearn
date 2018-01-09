@@ -41,4 +41,11 @@ public class Invoker {
         this.target = target;
     }
 
+    @Override
+    public String toString() {
+        return "Invoker{" +
+                "method=" + method +
+                ", target=" + target +
+                '}';
+    }
 }

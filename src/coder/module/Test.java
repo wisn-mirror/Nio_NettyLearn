@@ -7,8 +7,8 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class Test {
     public static void main(String[] args){
-        ApplicationContext applicationContext=new ClassPathXmlApplicationContext();
-        Invoker invoker = InvokerHolder.getInvoker((short) 1, (short) 1);
+        ApplicationContext applicationContext=new ClassPathXmlApplicationContext("beans.xml");
+        Invoker invoker = InvokerHolder.getInvoker((short) 2, (short) 1);
         if(invoker!=null){
             invoker.invoke(null);
         }else{
