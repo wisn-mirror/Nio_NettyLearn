@@ -16,7 +16,7 @@ import io.netty.util.CharsetUtil;
 import utils.LogUtils;
 
 public class Service {
-    private static final String TAG = "Service";
+    private static final String TAG = "ServiceA";
     private static final String IP = "127.0.0.1";
     private static final int PORT = 9999;
     /**

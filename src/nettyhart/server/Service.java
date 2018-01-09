@@ -17,7 +17,7 @@ import io.netty.util.CharsetUtil;
 import utils.LogUtils;
 
 public class Service {
-    private static final String TAG ="Service" ;
+    private static final String TAG ="ServiceA" ;
 
     public static void main(String[] args){
         ServerBootstrap bootstrap=new ServerBootstrap();
