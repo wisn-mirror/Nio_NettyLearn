@@ -8,7 +8,7 @@ import io.netty.channel.SimpleChannelInboundHandler;
 public class ServerHandler extends SimpleChannelInboundHandler<Request> {
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Request request) throws Exception {
-        System.out.println("ddd:"+request);
+        System.out.println("message:"+new String(request.getData()));
         Response  response=Response.valueOf((short)2,(short)2,(short)200,request.getData());
         channelHandlerContext.channel().writeAndFlush(response);
     }
