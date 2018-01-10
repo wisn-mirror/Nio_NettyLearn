@@ -2,6 +2,8 @@ package coder.response;
 
 import coder.ContentValues;
 
+import java.util.Arrays;
+
 public class Response {
     private int TAG = ContentValues.MESSAGE_HEADTAG;//int的最小值
     private short module; //模块号
@@ -63,5 +65,16 @@ public class Response {
             return 0;
         }
         return this.data.length;
+    }
+
+    @Override
+    public String toString() {
+        return "Response{" +
+                "TAG=" + TAG +
+                ", module=" + module +
+                ", cmd=" + cmd +
+                ", resultCode=" + resultCode +
+                ", data=" + Arrays.toString(data) +
+                '}';
     }
 }

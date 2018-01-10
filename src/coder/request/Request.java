@@ -2,6 +2,8 @@ package coder.request;
 
 import coder.ContentValues;
 
+import java.util.Arrays;
+
 public class Request {
     private int TAG = ContentValues.MESSAGE_HEADTAG;//int的最小值
     private short module; //模块号
@@ -53,5 +55,15 @@ public class Request {
             return 0;
         }
         return this.data.length;
+    }
+
+    @Override
+    public String toString() {
+        return "Request{" +
+                "TAG=" + TAG +
+                ", module=" + module +
+                ", cmd=" + cmd +
+                ", data=" + Arrays.toString(data) +
+                '}';
     }
 }
