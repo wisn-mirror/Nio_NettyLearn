@@ -10,8 +10,8 @@ public class ServerHandler extends SimpleChannelInboundHandler<Request> {
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, Request request) throws Exception {
         System.out.println("message:"+new String(request.getData()));
         Response  response=Response.valueOf((short)2,(short)2,(short)200,request.getData());
-        for(int i=0;i<100;i++){
+//        for(int i=0;i<3;i++){
             channelHandlerContext.channel().writeAndFlush(response);
-        }
+//        }
     }
 }
